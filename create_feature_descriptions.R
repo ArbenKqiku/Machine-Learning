@@ -6,6 +6,11 @@ create_features_description = function(data_table, description_column_number){
     
     # returns: tibble with features extracted from description column
     
+    # get the name of description_column_number
+    column_name = data_table %>% 
+        colnames()
+    column_name = column_name[description_column_number]
+        
     # rename description_column_number to "description"    
     colnames(data_table)[description_column_number] = "description"
 
@@ -51,6 +56,9 @@ create_features_description = function(data_table, description_column_number){
     }
     
     featured_data_table = as_tibble(featured_data_table)
+    
+    # rename "description" to original name 
+    colnames(featured_data_table)[description_column_number] = column_name
     
     return(featured_data_table)
 
